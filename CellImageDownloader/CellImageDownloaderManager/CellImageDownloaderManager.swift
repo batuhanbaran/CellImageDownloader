@@ -25,7 +25,7 @@ final class CellImageDownloaderManager: CellImageDownloaderManagerProtocol {
         if let imageFromCacheManager = object(imageUrl) {
             completion(imageFromCacheManager)
         } else {
-            guard imageUrl.isValidURL, let url = URL(string: imageUrl.addingPercentEncoding) else {
+            guard imageUrl.isValidURL, let url = URL(string: imageUrl) else {
                 completion(nil)
                 return
             }
@@ -47,7 +47,7 @@ final class CellImageDownloaderManager: CellImageDownloaderManagerProtocol {
                         return
                     }
                     
-                    self.setObject(with: (imageUrl: imageUrl.addingPercentEncoding, image: image))
+                    self.setObject(with: (imageUrl: imageUrl, image: image))
                     completion(image)
                 }
             }
