@@ -6,12 +6,11 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ImageCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var newsImageView: UIImageView!
-    
-    var manager: CellImageDownloaderManagerProtocol?
     
     static var identifier: String {
         return String(describing: self)
@@ -23,16 +22,12 @@ class ImageCollectionViewCell: UICollectionViewCell {
         newsImageView.layer.cornerRadius = 12
     }
 
-    func configure(url: String, manager: CellImageDownloaderManagerProtocol) {
-        self.manager = manager
-        
-        manager.fetchImage(from: url) { [weak self] image in
-            self?.newsImageView.image = image
-        }
+    func configure(url: String) {
+        guard let url = URL(string: url) else { return }
+        self.newsImageView.kf.setImage(with: url, completionHandler: nil)
     }
     
     override func prepareForReuse() {
-        manager?.cancelTask()
-        manager = nil
+        newsImageView.kf.cancelDownloadTask()
     }
 }

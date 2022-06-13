@@ -33,7 +33,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let articleImageUrl = articles?.articles?[indexPath.row].urlToImage
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.identifier, for: indexPath) as! ImageCollectionViewCell
-        cell.configure(url: articleImageUrl ?? "", manager: CellImageDownloaderManager.shared)
+        cell.configure(url: articleImageUrl ?? "")
         return cell
     }
     
